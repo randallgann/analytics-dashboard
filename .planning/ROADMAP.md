@@ -29,10 +29,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Background job runs every 6 hours and new GitHub data appears in charts without manual intervention
   4. The dashboard is publicly accessible with no login prompt and loads in under 3 seconds
   5. Old records older than 30 days are automatically pruned daily
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: TBD
+- [ ] 01-01-PLAN.md -- Infrastructure + data foundation (Octokit gem, GitHubMetric model, GithubClient service, WAL verification)
+- [ ] 01-02-PLAN.md -- Background jobs + scheduling (GithubMetricJob, DataRetentionJob, recurring.yml)
+- [ ] 01-03-PLAN.md -- Dashboard UI (dark theme, charts, sticky nav, empty states, visual verification)
 
 ### Phase 2: Social Feed — HN and Reddit
 **Goal**: A card-based social feed shows recent Hacker News and Reddit posts mentioning OpenClaw, updated every 2 hours
@@ -82,7 +84,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation + GitHub Pipeline | 0/? | Not started | - |
+| 1. Foundation + GitHub Pipeline | 0/3 | Not started | - |
 | 2. Social Feed — HN and Reddit | 0/? | Not started | - |
 | 3. YouTube Integration | 0/? | Not started | - |
 | 4. Dashboard Polish | 0/? | Not started | - |
