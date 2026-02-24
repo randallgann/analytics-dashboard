@@ -12,8 +12,8 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **INFRA-01**: SQLite WAL mode enabled on all databases to prevent write contention from concurrent background jobs
 - [x] **INFRA-02**: Shared rate-limit-aware HTTP client module with exponential backoff and typed errors (RateLimitError, AuthError, NotFoundError)
 - [x] **INFRA-03**: API credentials stored in Rails credentials or ENV variables, never hardcoded
-- [ ] **INFRA-04**: Solid Queue recurring job schedule configured for all data fetch jobs
-- [ ] **INFRA-05**: Data retention job prunes records older than 30 days daily
+- [x] **INFRA-04**: Solid Queue recurring job schedule configured for all data fetch jobs
+- [x] **INFRA-05**: Data retention job prunes records older than 30 days daily
 
 ### GitHub Metrics
 
@@ -24,7 +24,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **GH-05**: Dashboard displays commit frequency (per day)
 - [ ] **GH-06**: Dashboard displays contributor count and new contributor growth
 - [ ] **GH-07**: Dashboard displays latest release info and release cadence
-- [ ] **GH-08**: Background job fetches GitHub metrics via Octokit every 6 hours
+- [x] **GH-08**: Background job fetches GitHub metrics via Octokit every 6 hours
 - [x] **GH-09**: GitHub data stored in GitHubMetric model (metric_type + value + recorded_on, unique index)
 
 ### Social Tracking — Hacker News
@@ -101,8 +101,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFRA-01 | Phase 1 | Complete |
 | INFRA-02 | Phase 1 | Complete |
 | INFRA-03 | Phase 1 | Complete |
-| INFRA-04 | Phase 1 | Pending |
-| INFRA-05 | Phase 1 | Pending |
+| INFRA-04 | Phase 1 | Complete |
+| INFRA-05 | Phase 1 | Complete |
 | GH-01 | Phase 1 | Pending |
 | GH-02 | Phase 1 | Pending |
 | GH-03 | Phase 1 | Pending |
@@ -110,7 +110,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GH-05 | Phase 1 | Pending |
 | GH-06 | Phase 1 | Pending |
 | GH-07 | Phase 1 | Pending |
-| GH-08 | Phase 1 | Pending |
+| GH-08 | Phase 1 | Complete |
 | GH-09 | Phase 1 | Complete |
 | HN-01 | Phase 2 | Pending |
 | HN-02 | Phase 2 | Pending |
