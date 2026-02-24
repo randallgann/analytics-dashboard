@@ -38,6 +38,7 @@ class GithubMetricJobTest < ActiveSupport::TestCase
       pull_requests_count:  { open: 3, merged: 5, closed: 2 },
       commit_activity_stats: fake_stats,
       contributors_stats:   fake_contributors,
+      contributors_count:   3,
       latest_release:       fake_release,
       releases:             fake_releases
     }
@@ -51,6 +52,7 @@ class GithubMetricJobTest < ActiveSupport::TestCase
     end
     client.define_singleton_method(:commit_activity_stats) { opts[:commit_activity_stats] }
     client.define_singleton_method(:contributors_stats)    { opts[:contributors_stats] }
+    client.define_singleton_method(:contributors_count)    { opts[:contributors_count] }
     client.define_singleton_method(:latest_release)        { opts[:latest_release] }
     client.define_singleton_method(:releases)              { opts[:releases] }
 

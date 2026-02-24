@@ -34,6 +34,20 @@ class GithubClient
     fetch_stats { @client.contributors_stats(REPO_SLUG) }
   end
 
+  # Returns total contributor count using the contributors list endpoint.
+  # Fetches a single item per page and reads the last-page link to derive the
+  # total — one API call instead of paginating through hundreds of results.
+  # Includes anonymous contributors (anon: true) to match the GitHub UI count.
+  def contributors_count
+    @client.contributors(REPO_SLUG, true, per_page: 1)
+    last_rel = @client.last_response.rels[:last]
+    return 1 unless last_rel # only one page means 1 contributor
+
+    query = URI.parse(last_rel.href).query
+    params = URI.decode_www_form(query).to_h
+    params["page"].to_i
+  end
+
   # Returns count of open issues (excludes PRs via Search API — Pitfall 1)
   def open_issues_count
     @client.search_issues("repo:#{REPO_SLUG} is:issue is:open").total_count

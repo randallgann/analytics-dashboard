@@ -45,6 +45,7 @@ gem "chartkick"
 
 # GitHub API client [https://github.com/octokit/octokit.rb]
 gem "octokit", "~> 10.0"
+gem "faraday-retry", "~> 2.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

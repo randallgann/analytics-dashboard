@@ -55,11 +55,12 @@ class GithubMetricJob < ApplicationJob
   end
 
   # Stores a daily contributor_count snapshot, enabling a 30-day growth trend (GH-06).
-  # Uses safe_call so StatsUnavailableError does not crash the job.
+  # Uses contributors_count (list endpoint with Link header) instead of
+  # contributors_stats, which is capped at 100 results by GitHub.
   def record_contributor_count(client, today)
-    stats = safe_call { client.contributors_stats }
-    return if stats.blank?
-    upsert(metric_type: "contributor_count", value: stats.count, recorded_on: today)
+    count = safe_call { client.contributors_count }
+    return if count.blank?
+    upsert(metric_type: "contributor_count", value: count, recorded_on: today)
   end
 
   # Stores latest release date as a Julian Day Number for numeric storage.
@@ -79,9 +80,9 @@ class GithubMetricJob < ApplicationJob
 
   def upsert(metric_type:, value:, recorded_on:)
     return if value.nil?
-    GitHubMetric.find_or_create_by!(metric_type: metric_type, recorded_on: recorded_on) do |m|
-      m.value = value
-    end
+    metric = GitHubMetric.find_or_initialize_by(metric_type: metric_type, recorded_on: recorded_on)
+    metric.value = value
+    metric.save!
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.warn "GithubMetricJob: skipping invalid metric #{metric_type}: #{e.message}"
   end
