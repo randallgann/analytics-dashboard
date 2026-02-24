@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-02-23)
 ## Current Position
 
 Phase: 2 of 4 (Social Feed — HN and Reddit)
-Plan: 2 of 3 in current phase
+Plan: 3 of 3 in current phase
 Status: Active
-Last activity: 2026-02-24 — Completed plan 02-02 (HnSocialJob, RedditSocialJob, DataRetentionJob extended, recurring.yml scheduled)
+Last activity: 2026-02-24 — Completed plan 02-03 (Social feed UI with Stimulus tabs, social cards, error/empty states, nav link)
 
-Progress: [█████░░░░░] 42%
+Progress: [██████░░░░] 50%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
-- Average duration: 12min
-- Total execution time: 61min
+- Total plans completed: 6
+- Average duration: 15min
+- Total execution time: 91min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-foundation-github-pipeline | 3/3 | 55min | 18min |
-| 02-social-feed-hn-and-reddit | 2/3 | 6min | 3min |
+| 02-social-feed-hn-and-reddit | 3/3 | 36min | 12min |
 
 **Recent Trend:**
-- Last 5 plans: 4min, 35min, 3min, 3min
+- Last 5 plans: 35min, 3min, 3min, 30min
 - Trend: consistently fast
 
 *Updated after each plan completion*
@@ -64,6 +64,10 @@ Recent decisions affecting current work:
 - [02-02]: SocialPost.upsert mandatory for score/comment_count freshness — find_or_create_by leaves stale data on re-fetch
 - [02-02]: AuthError silenced for Reddit — missing credentials is expected pre-deployment; HN must work independently
 - [02-02]: 6-hour cache TTL for error state — auto-clears stale errors without requiring successful fetch
+- [02-03]: Stimulus tabs use data-tab-id on both button and panel targets — single attribute lookup, no fragile id management
+- [02-03]: Error state check precedes empty state check in view — fetch error shows "Unable to fetch" even when stale posts exist
+- [02-03]: Single-letter text badges (Y for HN, R for Reddit) in brand-colored squares — no icon library dependency
+- [02-03]: render_social_card helper isolates card markup — HN fallback URL logic contained in one tested helper method
 
 ### Pending Todos
 
@@ -79,5 +83,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-24
-Stopped at: Completed 02-02-PLAN.md (HnSocialJob, RedditSocialJob, DataRetentionJob, recurring.yml) — Phase 2 Plan 2 complete
+Stopped at: Completed 02-03-PLAN.md (Social feed UI with Stimulus tabs, cards, badges, error/empty states) — Phase 2 Plan 3 complete — Phase 2 complete
 Resume file: None

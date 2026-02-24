@@ -13,7 +13,7 @@ Transform the existing Rails 8.1 placeholder dashboard into a live analytics pro
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation + GitHub Pipeline** - SQLite WAL mode, shared HTTP client, GitHub API end-to-end with real chart data (completed 2026-02-24)
-- [ ] **Phase 2: Social Feed — HN and Reddit** - SocialPost model, card feed UI, Hacker News and Reddit ingest jobs
+- [x] **Phase 2: Social Feed — HN and Reddit** - SocialPost model, card feed UI, Hacker News and Reddit ingest jobs (completed 2026-02-24)
 - [ ] **Phase 3: YouTube Integration** - YouTube video cards with quota-aware scheduling (4x/day max)
 - [ ] **Phase 4: Dashboard Polish** - Engagement ranking, delta indicators, OpenGraph sharing tags
 
@@ -87,6 +87,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation + GitHub Pipeline | 3/3 | Complete    | 2026-02-24 |
-| 2. Social Feed — HN and Reddit | 2/3 | In Progress|  |
+| 2. Social Feed — HN and Reddit | 3/3 | Complete   | 2026-02-24 |
 | 3. YouTube Integration | 0/? | Not started | - |
 | 4. Dashboard Polish | 0/? | Not started | - |
