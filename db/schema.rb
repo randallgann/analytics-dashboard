@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_24_000357) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_24_021919) do
   create_table "github_metrics", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "metric_type", null: false
@@ -18,5 +18,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_24_000357) do
     t.datetime "updated_at", null: false
     t.decimal "value", precision: 15, scale: 4, null: false
     t.index ["metric_type", "recorded_on"], name: "index_github_metrics_on_metric_type_and_recorded_on", unique: true
+  end
+
+  create_table "social_posts", force: :cascade do |t|
+    t.string "author"
+    t.integer "comment_count", default: 0
+    t.datetime "created_at", null: false
+    t.string "external_id", null: false
+    t.datetime "fetched_at", null: false
+    t.string "platform", null: false
+    t.datetime "published_at"
+    t.integer "score", default: 0
+    t.string "subreddit"
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.string "url"
+    t.index ["platform", "external_id"], name: "index_social_posts_on_platform_and_external_id", unique: true
+    t.index ["platform"], name: "index_social_posts_on_platform"
+    t.index ["published_at"], name: "index_social_posts_on_published_at"
   end
 end
