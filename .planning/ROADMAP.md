@@ -32,9 +32,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md -- Infrastructure + data foundation (Octokit gem, GitHubMetric model, GithubClient service, WAL verification)
-- [ ] 01-02-PLAN.md -- Background jobs + scheduling (GithubMetricJob, DataRetentionJob, recurring.yml)
-- [ ] 01-03-PLAN.md -- Dashboard UI (dark theme, charts, sticky nav, empty states, visual verification)
+- [x] 01-01-PLAN.md -- Infrastructure + data foundation (Octokit gem, GitHubMetric model, GithubClient service, WAL verification)
+- [x] 01-02-PLAN.md -- Background jobs + scheduling (GithubMetricJob, DataRetentionJob, recurring.yml)
+- [x] 01-03-PLAN.md -- Dashboard UI (dark theme, charts, sticky nav, empty states, visual verification)
 
 ### Phase 2: Social Feed — HN and Reddit
 **Goal**: A card-based social feed shows recent Hacker News and Reddit posts mentioning OpenClaw, updated every 2 hours
@@ -46,10 +46,12 @@ Plans:
   3. Each social card shows a platform badge (HN or Reddit) identifying its source
   4. Each feed section shows a "last updated" timestamp so stale data is visible
   5. If one platform's fetch job fails, the other platform's feed continues to display normally
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: TBD
+- [ ] 02-01-PLAN.md -- Data foundation (SocialPost model + migration, HnClient service, RedditClient service)
+- [ ] 02-02-PLAN.md -- Background jobs + scheduling (HnSocialJob, RedditSocialJob, DataRetentionJob extension, recurring.yml)
+- [ ] 02-03-PLAN.md -- Dashboard UI (Stimulus tabs, social card feed, platform badges, empty states, visual verification)
 
 ### Phase 3: YouTube Integration
 **Goal**: YouTube video cards appear in the social feed, fetched at most 4 times per day to stay within the free API quota
@@ -80,11 +82,11 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation + GitHub Pipeline | 3/3 | Complete    | 2026-02-24 |
-| 2. Social Feed — HN and Reddit | 0/? | Not started | - |
+| 2. Social Feed — HN and Reddit | 0/3 | Not started | - |
 | 3. YouTube Integration | 0/? | Not started | - |
 | 4. Dashboard Polish | 0/? | Not started | - |
