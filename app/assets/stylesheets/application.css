@@ -476,6 +476,11 @@ body {
   color: #fff;
 }
 
+.dash-social-badge--youtube {
+  background: #ff0000;
+  color: #fff;
+}
+
 .dash-social-content {
   flex: 1;
   min-width: 0;

@@ -37,5 +37,10 @@ class DashboardController < ApplicationController
     # Fetch error state from cache (written by social fetch jobs on failure, cleared on success)
     @hn_fetch_error     = Rails.cache.read("social_fetch_error:hn")
     @reddit_fetch_error = Rails.cache.read("social_fetch_error:reddit")
+
+    # YouTube social feed data (Phase 3)
+    @youtube_posts       = SocialPost.for_platform("youtube").top_posts(5)
+    @youtube_last_updated = SocialPost.last_fetched_at("youtube")
+    @youtube_fetch_error  = Rails.cache.read("social_fetch_error:youtube")
   end
 end

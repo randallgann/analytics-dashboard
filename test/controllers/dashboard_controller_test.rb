@@ -5,6 +5,7 @@ class DashboardControllerTest < ActionDispatch::IntegrationTest
   teardown do
     Rails.cache.delete("social_fetch_error:hn")
     Rails.cache.delete("social_fetch_error:reddit")
+    Rails.cache.delete("social_fetch_error:youtube")
   end
 
   # DASH-06: Dashboard is publicly accessible with no login prompt
@@ -125,6 +126,43 @@ class DashboardControllerTest < ActionDispatch::IntegrationTest
       # Even though HN fixture posts exist, error message should appear
       assert_no_match /No recent mentions found on Hacker News/, response.body
     end
+  end
+
+  # YouTube UI tests (Phase 3)
+  test "YouTube post title appears in response when YouTube fixture exists" do
+    get root_url
+    assert_response :success
+    assert_match /OpenClaw Tutorial/, response.body
+  end
+
+  test "YouTube tab button is rendered" do
+    get root_url
+    assert_response :success
+    assert_match /data-tab-id="youtube"/, response.body
+  end
+
+  test "YouTube empty state shown when no social posts exist" do
+    SocialPost.delete_all
+    get root_url
+    assert_response :success
+    assert_match /No recent mentions found on YouTube/, response.body
+  end
+
+  test "YouTube fetch error state shows error message not empty state" do
+    SocialPost.delete_all
+    with_memory_cache do |cache|
+      cache.write("social_fetch_error:youtube", "Connection refused")
+      get root_url
+      assert_response :success
+      assert_match /Unable to fetch YouTube videos/, response.body
+      assert_no_match /No recent mentions found on YouTube/, response.body
+    end
+  end
+
+  test "YouTube badge rendered for youtube post" do
+    get root_url
+    assert_response :success
+    assert_match /dash-social-badge--youtube/, response.body
   end
 
   private

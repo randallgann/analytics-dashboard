@@ -39,7 +39,13 @@ module DashboardHelper
   def render_social_card(post)
     content_tag(:div, class: "dash-social-card") do
       badge = content_tag(:div, class: "dash-social-badge dash-social-badge--#{post.platform}") do
-        post.hn? ? "Y".html_safe : "R".html_safe
+        if post.hn?
+          "Y".html_safe
+        elsif post.reddit?
+          "R".html_safe
+        else
+          "YT".html_safe
+        end
       end
 
       content = content_tag(:div, class: "dash-social-content") do
@@ -49,8 +55,12 @@ module DashboardHelper
         title_link = link_to(post.title, card_url, target: "_blank", rel: "noopener", class: "dash-social-title")
 
         meta_parts = []
-        meta_parts << content_tag(:span, "#{post.score} pts")
-        meta_parts << content_tag(:span, "#{post.comment_count} comments")
+        if post.youtube?
+          meta_parts << content_tag(:span, "#{format_number(post.score)} views")
+        else
+          meta_parts << content_tag(:span, "#{post.score} pts")
+        end
+        meta_parts << content_tag(:span, "#{post.comment_count} comments") unless post.youtube?
         meta_parts << content_tag(:span, post.author) if post.author.present?
         meta_parts << content_tag(:span, "r/#{post.subreddit}") if post.reddit? && post.subreddit.present?
         meta_parts << content_tag(:span, "#{time_ago_in_words(post.published_at)} ago") if post.published_at.present?
