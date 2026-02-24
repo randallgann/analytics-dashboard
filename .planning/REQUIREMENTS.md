@@ -30,15 +30,15 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Social Tracking — Hacker News
 
 - [ ] **HN-01**: Dashboard displays recent HN posts mentioning OpenClaw as card feed
-- [ ] **HN-02**: Each HN card shows title, points, comment count, author, and published date
-- [ ] **HN-03**: Each HN card links to original HN discussion
+- [x] **HN-02**: Each HN card shows title, points, comment count, author, and published date
+- [x] **HN-03**: Each HN card links to original HN discussion
 - [ ] **HN-04**: Background job fetches HN posts via Algolia API every 2 hours
 
 ### Social Tracking — Reddit
 
 - [ ] **RDT-01**: Dashboard displays recent Reddit posts mentioning OpenClaw as card feed
-- [ ] **RDT-02**: Each Reddit card shows title, upvotes, comment count, subreddit, author, and published date
-- [ ] **RDT-03**: Each Reddit card links to original Reddit post
+- [x] **RDT-02**: Each Reddit card shows title, upvotes, comment count, subreddit, author, and published date
+- [x] **RDT-03**: Each Reddit card links to original Reddit post
 - [ ] **RDT-04**: Background job fetches Reddit posts via API (OAuth2 if needed) every 2 hours
 
 ### Social Tracking — YouTube
@@ -50,7 +50,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Social Data Model
 
-- [ ] **SOC-01**: All social posts stored in normalized SocialPost model (platform + external_id + title + url + author + score + comment_count + published_at)
+- [x] **SOC-01**: All social posts stored in normalized SocialPost model (platform + external_id + title + url + author + score + comment_count + published_at)
 - [ ] **SOC-02**: Platform badge displayed on each social card (HN, Reddit, YouTube)
 - [ ] **SOC-03**: "Last updated" timestamp shown per data source section
 
@@ -113,14 +113,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GH-08 | Phase 1 | Complete |
 | GH-09 | Phase 1 | Complete |
 | HN-01 | Phase 2 | Pending |
-| HN-02 | Phase 2 | Pending |
-| HN-03 | Phase 2 | Pending |
+| HN-02 | Phase 2 | Complete |
+| HN-03 | Phase 2 | Complete |
 | HN-04 | Phase 2 | Pending |
 | RDT-01 | Phase 2 | Pending |
-| RDT-02 | Phase 2 | Pending |
-| RDT-03 | Phase 2 | Pending |
+| RDT-02 | Phase 2 | Complete |
+| RDT-03 | Phase 2 | Complete |
 | RDT-04 | Phase 2 | Pending |
-| SOC-01 | Phase 2 | Pending |
+| SOC-01 | Phase 2 | Complete |
 | SOC-02 | Phase 2 | Pending |
 | SOC-03 | Phase 2 | Pending |
 | YT-01 | Phase 3 | Pending |

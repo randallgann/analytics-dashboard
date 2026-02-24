@@ -5,32 +5,33 @@
 See: .planning/PROJECT.md (updated 2026-02-23)
 
 **Core value:** Anyone can see at a glance how OpenClaw is growing and what people are saying about it
-**Current focus:** Phase 1 — Foundation + GitHub Pipeline
+**Current focus:** Phase 2 — Social Feed (HN and Reddit)
 
 ## Current Position
 
-Phase: 1 of 4 (Foundation + GitHub Pipeline)
-Plan: 3 of 3 in current phase (phase complete)
-Status: Phase 1 Complete — Ready for Phase 2
-Last activity: 2026-02-23 — Completed plan 01-03 (dark-themed dashboard UI with Chartkick charts)
+Phase: 2 of 4 (Social Feed — HN and Reddit)
+Plan: 1 of 3 in current phase
+Status: Active
+Last activity: 2026-02-24 — Completed plan 02-01 (SocialPost model, HnClient, RedditClient)
 
-Progress: [███░░░░░░░] 25%
+Progress: [████░░░░░░] 33%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 18min
-- Total execution time: 55min
+- Total plans completed: 4
+- Average duration: 14min
+- Total execution time: 58min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-foundation-github-pipeline | 3/3 | 55min | 18min |
+| 02-social-feed-hn-and-reddit | 1/3 | 3min | 3min |
 
 **Recent Trend:**
-- Last 5 plans: 16min, 4min, 35min
+- Last 5 plans: 16min, 4min, 35min, 3min
 - Trend: variable
 
 *Updated after each plan completion*
@@ -56,6 +57,9 @@ Recent decisions affecting current work:
 - [01-03]: Rails 8 controller tests use response body assertions instead of assigns helper (removed in Rails 8)
 - [01-03]: jd_to_date helper converts Julian Day Number stored in latest_release_date metric to Ruby Date for display
 - [01-03]: Gemfile :windows platform entry removed — invalid platform identifier caused bundler error on macOS/Linux
+- [02-01]: HN URL fallback to discussion page — hit["url"] || HN item URL — Ask HN posts lack external URL, discussion thread is correct destination
+- [02-01]: Always-fresh Reddit OAuth2 token — never cache; tokens expire in 1 hour but sync job runs every 2 hours
+- [02-01]: All subreddits searched (no restrict_sr) — correct default for cross-Reddit brand monitoring
 
 ### Pending Todos
 
@@ -70,6 +74,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-23
-Stopped at: Completed 01-03-PLAN.md (dark-themed dashboard UI with Chartkick charts) — Phase 1 complete
+Last session: 2026-02-24
+Stopped at: Completed 02-01-PLAN.md (SocialPost model, HnClient, RedditClient) — Phase 2 Plan 1 complete
 Resume file: None
