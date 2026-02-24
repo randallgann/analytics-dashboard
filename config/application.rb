@@ -11,6 +11,11 @@ module AnalyticsDashboard
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.1
 
+    # Teach Zeitwerk that "github" is an acronym (maps github_metric.rb -> GitHubMetric)
+    config.autoload_once_paths.tap do
+      Rails.autoloaders.each { |al| al.inflector.inflect("github_metric" => "GitHubMetric") }
+    end
+
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
