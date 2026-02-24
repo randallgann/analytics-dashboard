@@ -19,8 +19,6 @@ Deploy the Analytics Dashboard to Google Cloud Run as a standalone container. Th
 |---|---|---|
 | `RAILS_MASTER_KEY` | Yes | Contents of `config/master.key` |
 | `GITHUB_TOKEN` | Yes | GitHub personal access token (public repo read access) |
-| `REDDIT_CLIENT_ID` | No | Reddit API client ID (for social feed) |
-| `REDDIT_CLIENT_SECRET` | No | Reddit API client secret |
 | `SOLID_QUEUE_IN_PUMA` | Yes | Set to `true` — runs background jobs inside the web process |
 
 ## Build & Push
@@ -60,8 +58,6 @@ gcloud run deploy analytics-dashboard \
   --set-env-vars "SOLID_QUEUE_IN_PUMA=true" \
   --set-env-vars "RAILS_ENV=production" \
   --set-env-vars "GITHUB_TOKEN=your-github-token" \
-  --set-env-vars "REDDIT_CLIENT_ID=your-reddit-client-id" \
-  --set-env-vars "REDDIT_CLIENT_SECRET=your-reddit-client-secret" \
   --set-secrets "RAILS_MASTER_KEY=rails-master-key:latest"
 ```
 

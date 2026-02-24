@@ -58,29 +58,6 @@ class RedditSocialJobTest < ActiveSupport::TestCase
   # Error handling
   # ----------------------------------------------------------------
 
-  test "AuthError is caught and does not raise" do
-    RedditClient.define_singleton_method(:new) { raise RedditClient::AuthError, "credentials missing" }
-
-    assert_nothing_raised { RedditSocialJob.perform_now }
-  ensure
-    RedditClient.singleton_class.remove_method(:new)
-  end
-
-  test "AuthError writes error to Rails.cache under social_fetch_error:reddit key" do
-    original_cache = Rails.cache
-    Rails.cache = ActiveSupport::Cache::MemoryStore.new
-
-    RedditClient.define_singleton_method(:new) { raise RedditClient::AuthError, "credentials missing" }
-
-    RedditSocialJob.perform_now
-
-    assert_equal "credentials missing", Rails.cache.read("social_fetch_error:reddit"),
-                 "Expected AuthError message to be written to cache"
-  ensure
-    RedditClient.singleton_class.remove_method(:new) if RedditClient.singleton_class.method_defined?(:new, false)
-    Rails.cache = original_cache
-  end
-
   test "FetchError writes error to Rails.cache under social_fetch_error:reddit key" do
     original_cache = Rails.cache
     Rails.cache = ActiveSupport::Cache::MemoryStore.new

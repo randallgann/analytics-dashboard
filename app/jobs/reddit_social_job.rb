@@ -22,10 +22,6 @@ class RedditSocialJob < ApplicationJob
 
     Rails.cache.delete(FETCH_ERROR_KEY)
     Rails.logger.info "RedditSocialJob: upserted #{count} Reddit posts"
-  rescue RedditClient::AuthError => e
-    Rails.logger.error "RedditSocialJob: auth failed — #{e.message}"
-    Rails.cache.write(FETCH_ERROR_KEY, e.message, expires_in: 6.hours)
-    # Do not re-raise — missing credentials is a known pre-deployment state; HN feed should work independently
   rescue RedditClient::FetchError => e
     Rails.logger.error "RedditSocialJob: fetch failed — #{e.message}"
     Rails.cache.write(FETCH_ERROR_KEY, e.message, expires_in: 6.hours)

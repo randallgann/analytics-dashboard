@@ -13,24 +13,9 @@ class RedditClientTest < ActiveSupport::TestCase
     "created_utc"  => 1734566400  # 2024-12-19 00:00:00 UTC
   }.freeze
 
-  # Test that AuthError is raised when no credentials available
-  test "raises AuthError when no credentials available" do
-    # Save and clear ENV credentials
-    original_id     = ENV.delete("REDDIT_CLIENT_ID")
-    original_secret = ENV.delete("REDDIT_CLIENT_SECRET")
-
-    assert_raises(RedditClient::AuthError) do
-      # Rails credentials won't have reddit keys in test env, so ENV is the only source
-      RedditClient.new
-    end
-  ensure
-    ENV["REDDIT_CLIENT_ID"]     = original_id     if original_id
-    ENV["REDDIT_CLIENT_SECRET"] = original_secret if original_secret
-  end
-
   # Test that normalize produces correct hash from sample Reddit post JSON
   test "normalize produces correct hash from sample post" do
-    client = RedditClient.allocate
+    client = RedditClient.new
     result = client.send(:normalize, SAMPLE_POST)
 
     assert_equal "def456",                                       result[:external_id]
@@ -45,7 +30,7 @@ class RedditClientTest < ActiveSupport::TestCase
 
   # Test that normalize converts created_utc to UTC Time
   test "normalize converts created_utc unix timestamp to UTC Time" do
-    client = RedditClient.allocate
+    client = RedditClient.new
     result = client.send(:normalize, SAMPLE_POST)
 
     expected_time = Time.at(1734566400).utc
