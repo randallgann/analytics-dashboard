@@ -130,4 +130,27 @@ class SocialPostTest < ActiveSupport::TestCase
     expected = "https://news.ycombinator.com/item?id=#{post.external_id}"
     assert_equal expected, post.hn_discussion_url
   end
+
+  # youtube? predicate
+  test "youtube? returns true for YouTube posts" do
+    post = social_posts(:youtube_post_one)
+    assert post.youtube?
+    assert_not post.hn?
+    assert_not post.reddit?
+  end
+
+  # YouTube post passes validation
+  test "saves valid YouTube post" do
+    post = SocialPost.new(
+      platform: "youtube",
+      external_id: "yt_test001",
+      title: "OpenClaw Video Tutorial",
+      url: "https://www.youtube.com/watch?v=yt_test001",
+      author: "DevChannel",
+      score: 14523,
+      comment_count: 0,
+      fetched_at: Time.current
+    )
+    assert post.valid?, "Expected YouTube post to be valid: #{post.errors.full_messages.inspect}"
+  end
 end

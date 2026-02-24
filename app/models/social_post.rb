@@ -1,5 +1,5 @@
 class SocialPost < ApplicationRecord
-  PLATFORMS = %w[hn reddit].freeze
+  PLATFORMS = %w[hn reddit youtube].freeze
 
   validates :platform,    inclusion: { in: PLATFORMS }
   validates :external_id, presence: true, uniqueness: { scope: :platform }
@@ -22,6 +22,10 @@ class SocialPost < ApplicationRecord
 
   def reddit?
     platform == "reddit"
+  end
+
+  def youtube?
+    platform == "youtube"
   end
 
   def hn_discussion_url

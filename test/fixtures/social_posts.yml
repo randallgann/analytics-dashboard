@@ -25,3 +25,17 @@ reddit_post_one:
   fetched_at: "2025-12-16 09:00:00"
   created_at: "2025-12-16 09:00:00"
   updated_at: "2025-12-16 09:00:00"
+
+youtube_post_one:
+  platform: youtube
+  external_id: "yt_abc123"
+  title: "OpenClaw Tutorial"
+  url: "https://www.youtube.com/watch?v=yt_abc123"
+  author: "DevChannel"
+  score: 14523
+  comment_count: 0
+  subreddit:
+  published_at: "2025-12-17 14:00:00"
+  fetched_at: "2025-12-17 16:00:00"
+  created_at: "2025-12-17 16:00:00"
+  updated_at: "2025-12-17 16:00:00"
