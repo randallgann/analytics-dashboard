@@ -25,5 +25,17 @@ class DashboardController < ApplicationController
 
     # Has any data at all?
     @has_data = GitHubMetric.exists?
+
+    # Social feed data (Phase 2)
+    @hn_posts     = SocialPost.for_platform("hn").top_posts(5)
+    @reddit_posts = SocialPost.for_platform("reddit").top_posts(5)
+    @all_posts    = SocialPost.order(score: :desc).limit(10)
+
+    @hn_last_updated     = SocialPost.last_fetched_at("hn")
+    @reddit_last_updated = SocialPost.last_fetched_at("reddit")
+
+    # Fetch error state from cache (written by social fetch jobs on failure, cleared on success)
+    @hn_fetch_error     = Rails.cache.read("social_fetch_error:hn")
+    @reddit_fetch_error = Rails.cache.read("social_fetch_error:reddit")
   end
 end
