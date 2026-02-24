@@ -17,13 +17,13 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### GitHub Metrics
 
-- [ ] **GH-01**: Dashboard displays star count over time as a line chart (30-day rolling window)
-- [ ] **GH-02**: Dashboard displays fork count over time as a line chart (30-day rolling window)
-- [ ] **GH-03**: Dashboard displays open vs. closed issue counts
-- [ ] **GH-04**: Dashboard displays PR activity (open/merged/closed)
-- [ ] **GH-05**: Dashboard displays commit frequency (per day)
-- [ ] **GH-06**: Dashboard displays contributor count and new contributor growth
-- [ ] **GH-07**: Dashboard displays latest release info and release cadence
+- [x] **GH-01**: Dashboard displays star count over time as a line chart (30-day rolling window)
+- [x] **GH-02**: Dashboard displays fork count over time as a line chart (30-day rolling window)
+- [x] **GH-03**: Dashboard displays open vs. closed issue counts
+- [x] **GH-04**: Dashboard displays PR activity (open/merged/closed)
+- [x] **GH-05**: Dashboard displays commit frequency (per day)
+- [x] **GH-06**: Dashboard displays contributor count and new contributor growth
+- [x] **GH-07**: Dashboard displays latest release info and release cadence
 - [x] **GH-08**: Background job fetches GitHub metrics via Octokit every 6 hours
 - [x] **GH-09**: GitHub data stored in GitHubMetric model (metric_type + value + recorded_on, unique index)
 
@@ -57,11 +57,11 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Dashboard Presentation
 
 - [ ] **DASH-01**: Hero metrics row showing total stars, forks, open issues with 7-day delta indicators
-- [ ] **DASH-02**: Time-series charts rendered via Chartkick/Chart.js with real data (replacing static placeholders)
+- [x] **DASH-02**: Time-series charts rendered via Chartkick/Chart.js with real data (replacing static placeholders)
 - [ ] **DASH-03**: Social posts ranked by recency-weighted engagement score (fresh + engaging posts surface first)
 - [ ] **DASH-04**: OpenGraph meta tags for rich preview when dashboard URL is shared
-- [ ] **DASH-05**: Page loads under 3 seconds (all data pre-fetched by background jobs)
-- [ ] **DASH-06**: Public-facing, no authentication required
+- [x] **DASH-05**: Page loads under 3 seconds (all data pre-fetched by background jobs)
+- [x] **DASH-06**: Public-facing, no authentication required
 
 ## v2 Requirements
 
@@ -103,13 +103,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INFRA-03 | Phase 1 | Complete |
 | INFRA-04 | Phase 1 | Complete |
 | INFRA-05 | Phase 1 | Complete |
-| GH-01 | Phase 1 | Pending |
-| GH-02 | Phase 1 | Pending |
-| GH-03 | Phase 1 | Pending |
-| GH-04 | Phase 1 | Pending |
-| GH-05 | Phase 1 | Pending |
-| GH-06 | Phase 1 | Pending |
-| GH-07 | Phase 1 | Pending |
+| GH-01 | Phase 1 | Complete |
+| GH-02 | Phase 1 | Complete |
+| GH-03 | Phase 1 | Complete |
+| GH-04 | Phase 1 | Complete |
+| GH-05 | Phase 1 | Complete |
+| GH-06 | Phase 1 | Complete |
+| GH-07 | Phase 1 | Complete |
 | GH-08 | Phase 1 | Complete |
 | GH-09 | Phase 1 | Complete |
 | HN-01 | Phase 2 | Pending |
@@ -128,11 +128,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | YT-03 | Phase 3 | Pending |
 | YT-04 | Phase 3 | Pending |
 | DASH-01 | Phase 4 | Pending |
-| DASH-02 | Phase 1 | Pending |
+| DASH-02 | Phase 1 | Complete |
 | DASH-03 | Phase 4 | Pending |
 | DASH-04 | Phase 4 | Pending |
-| DASH-05 | Phase 1 | Pending |
-| DASH-06 | Phase 1 | Pending |
+| DASH-05 | Phase 1 | Complete |
+| DASH-06 | Phase 1 | Complete |
 
 **Coverage:**
 - v1 requirements: 35 total
