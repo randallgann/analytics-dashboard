@@ -33,3 +33,8 @@ production:
     class: RedditSocialJob
     schedule: every 2 hours
     queue: default
+
+  youtube_social_fetch:
+    class: YoutubeSocialJob
+    schedule: every 6 hours
+    queue: default
