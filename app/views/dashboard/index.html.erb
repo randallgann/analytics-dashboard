@@ -1,3 +1,227 @@
-<h1>Analytics Dashboard</h1>
+<%# OpenClaw Analytics Dashboard — dark theme, sticky nav, section anchors %>
 
-<%= column_chart [{name: "Sales", data: {"Q1": 100, "Q2": 200, "Q3": 300, "Q4": 400}}] %>
+<%# ============================================================
+    Sticky Navigation
+    ============================================================ %>
+<nav class="dash-nav">
+  <div class="dash-nav-inner">
+    <div class="dash-nav-brand"><span>Open</span>Claw</div>
+    <a href="#stars-forks">Stars &amp; Forks</a>
+    <a href="#activity">Activity</a>
+    <a href="#issues-prs">Issues &amp; PRs</a>
+    <a href="#releases">Releases</a>
+  </div>
+</nav>
+
+<div class="dash-page">
+  <div class="dash-container">
+
+    <%# ============================================================
+        Header
+        ============================================================ %>
+    <header class="dash-header">
+      <h1><span>OpenClaw</span> Analytics Dashboard</h1>
+      <p>GitHub repository metrics &mdash; updated automatically</p>
+    </header>
+
+    <%# ============================================================
+        Full-page empty state (no data at all)
+        ============================================================ %>
+    <% if !@has_data %>
+      <div class="dash-full-empty">
+        <div class="dash-full-empty-icon">&#9202;</div>
+        <h2>Collecting data&hellip;</h2>
+        <p>
+          No metrics have been recorded yet. Data will appear after the first background job runs
+          &mdash; approximately 6 hours after deployment.
+        </p>
+      </div>
+
+    <% else %>
+
+      <%# ============================================================
+          Section 1: Stars & Forks
+          ============================================================ %>
+      <section id="stars-forks" class="dash-section">
+        <div class="dash-section-header">
+          <h2 class="dash-section-title">Stars &amp; Forks</h2>
+          <span class="dash-section-updated"><%= time_ago_or_never(@last_updated) %></span>
+        </div>
+
+        <div class="dash-grid-2">
+          <%# Stars card %>
+          <div class="dash-card">
+            <div class="dash-card-title">Stars</div>
+            <div class="dash-card-number">
+              <%= format_number(@stars_count) %>
+              <span class="dash-card-number-label">stars</span>
+            </div>
+            <div class="dash-card-chart">
+              <% if metric_empty?(@stars_data) %>
+                <div class="dash-empty">
+                  <div class="dash-empty-icon">&#9202;</div>
+                  <div class="dash-empty-title">Collecting data&hellip;</div>
+                  <div class="dash-empty-hint">First data point in ~6 hours</div>
+                </div>
+              <% else %>
+                <%= area_chart @stars_data, height: "250px", points: false, curve: false,
+                    dataset: { fill: true, backgroundColor: "rgba(96, 165, 250, 0.15)", borderColor: "#60a5fa", borderWidth: 2 } %>
+              <% end %>
+            </div>
+          </div>
+
+          <%# Forks card %>
+          <div class="dash-card">
+            <div class="dash-card-title">Forks</div>
+            <div class="dash-card-number">
+              <%= format_number(@forks_count) %>
+              <span class="dash-card-number-label">forks</span>
+            </div>
+            <div class="dash-card-chart">
+              <% if metric_empty?(@forks_data) %>
+                <div class="dash-empty">
+                  <div class="dash-empty-icon">&#9202;</div>
+                  <div class="dash-empty-title">Collecting data&hellip;</div>
+                  <div class="dash-empty-hint">First data point in ~6 hours</div>
+                </div>
+              <% else %>
+                <%= area_chart @forks_data, height: "250px", points: false, curve: false,
+                    dataset: { fill: true, backgroundColor: "rgba(52, 211, 153, 0.15)", borderColor: "#34d399", borderWidth: 2 } %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <%# ============================================================
+          Section 2: Commit Activity & Contributors
+          ============================================================ %>
+      <section id="activity" class="dash-section">
+        <div class="dash-section-header">
+          <h2 class="dash-section-title">Activity</h2>
+          <span class="dash-section-updated"><%= time_ago_or_never(@last_updated) %></span>
+        </div>
+
+        <div class="dash-grid-2">
+          <%# Commit frequency chart %>
+          <div class="dash-card">
+            <div class="dash-card-title">Commit Frequency</div>
+            <div class="dash-card-number">
+              <%= format_number(GitHubMetric.latest_value("commit_frequency")) %>
+              <span class="dash-card-number-label">commits today</span>
+            </div>
+            <div class="dash-card-chart">
+              <% if metric_empty?(@commit_data) %>
+                <div class="dash-empty">
+                  <div class="dash-empty-icon">&#9202;</div>
+                  <div class="dash-empty-title">Collecting data&hellip;</div>
+                  <div class="dash-empty-hint">First data point in ~6 hours</div>
+                </div>
+              <% else %>
+                <%= bar_chart @commit_data, height: "250px" %>
+              <% end %>
+            </div>
+          </div>
+
+          <%# Contributor count + 30-day growth trend (GH-06) %>
+          <div class="dash-card">
+            <div class="dash-card-title">Contributors</div>
+            <div class="dash-card-number">
+              <%= format_number(@contributor_count) %>
+              <span class="dash-card-number-label">contributors</span>
+            </div>
+            <div class="dash-card-chart">
+              <% if metric_empty?(@contributor_data) %>
+                <div class="dash-empty">
+                  <div class="dash-empty-icon">&#9202;</div>
+                  <div class="dash-empty-title">Collecting data&hellip;</div>
+                  <div class="dash-empty-hint">First data point in ~6 hours</div>
+                </div>
+              <% else %>
+                <%= line_chart @contributor_data, height: "250px", points: false,
+                    dataset: { borderColor: "#a78bfa", borderWidth: 2 } %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <%# ============================================================
+          Section 3: Issues & Pull Requests
+          ============================================================ %>
+      <section id="issues-prs" class="dash-section">
+        <div class="dash-section-header">
+          <h2 class="dash-section-title">Issues &amp; Pull Requests</h2>
+          <span class="dash-section-updated"><%= time_ago_or_never(@last_updated) %></span>
+        </div>
+
+        <div class="dash-grid-stats">
+          <div class="dash-stat-card">
+            <div class="dash-stat-number"><%= format_number(@open_issues) %></div>
+            <div class="dash-stat-label">Open Issues</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="dash-stat-number"><%= format_number(@closed_issues) %></div>
+            <div class="dash-stat-label">Closed Issues</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="dash-stat-number"><%= format_number(@open_prs) %></div>
+            <div class="dash-stat-label">Open PRs</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="dash-stat-number"><%= format_number(@merged_prs) %></div>
+            <div class="dash-stat-label">Merged PRs</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="dash-stat-number"><%= format_number(@closed_prs) %></div>
+            <div class="dash-stat-label">Closed PRs</div>
+          </div>
+        </div>
+      </section>
+
+      <%# ============================================================
+          Section 4: Releases (GH-07)
+          ============================================================ %>
+      <section id="releases" class="dash-section">
+        <div class="dash-section-header">
+          <h2 class="dash-section-title">Releases</h2>
+          <span class="dash-section-updated"><%= time_ago_or_never(@last_updated) %></span>
+        </div>
+
+        <% if @latest_release_jd.nil? && @release_cadence.nil? %>
+          <div class="dash-card">
+            <div class="dash-empty">
+              <div class="dash-empty-icon">&#128230;</div>
+              <div class="dash-empty-title">No release data yet</div>
+              <div class="dash-empty-hint">Release information will appear after the first sync</div>
+            </div>
+          </div>
+        <% else %>
+          <div class="dash-release-card">
+            <% release_date = jd_to_date(@latest_release_jd) %>
+            <div class="dash-release-item">
+              <div class="dash-release-item-label">Latest Release</div>
+              <% if release_date %>
+                <div class="dash-release-item-value"><%= release_date.strftime("%b %-d, %Y") %></div>
+              <% else %>
+                <div class="dash-release-item-value" style="color: #475569;">No release recorded</div>
+              <% end %>
+            </div>
+
+            <div class="dash-release-item">
+              <div class="dash-release-item-label">Release Cadence (30 days)</div>
+              <% if @release_cadence.nil? || @release_cadence.to_i == 0 %>
+                <div class="dash-release-item-value cadence" style="color: #475569;">No recent releases</div>
+              <% else %>
+                <div class="dash-release-item-value cadence">
+                  <%= @release_cadence.to_i %> <%= "release".pluralize(@release_cadence.to_i) %> in last 30 days
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </section>
+
+    <% end %>
+  </div>
+</div>
