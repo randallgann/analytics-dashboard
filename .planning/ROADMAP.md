@@ -64,7 +64,7 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 03-01-PLAN.md -- YouTube data pipeline (YoutubeClient service, YoutubeSocialJob, SocialPost model update, recurring schedule)
+- [x] 03-01-PLAN.md -- YouTube data pipeline (YoutubeClient service, YoutubeSocialJob, SocialPost model update, recurring schedule)
 - [ ] 03-02-PLAN.md -- Dashboard UI (YouTube tab, card rendering, badge, error/empty states, visual verification)
 
 ### Phase 4: Dashboard Polish
@@ -89,5 +89,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 |-------|----------------|--------|-----------|
 | 1. Foundation + GitHub Pipeline | 3/3 | Complete    | 2026-02-24 |
 | 2. Social Feed — HN and Reddit | 3/3 | Complete   | 2026-02-24 |
-| 3. YouTube Integration | 0/2 | Not started | - |
+| 3. YouTube Integration | 1/2 | In progress | - |
 | 4. Dashboard Polish | 0/? | Not started | - |

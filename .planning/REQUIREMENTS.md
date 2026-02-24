@@ -45,8 +45,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **YT-01**: Dashboard displays recent YouTube videos mentioning OpenClaw as card feed
 - [ ] **YT-02**: Each YouTube card shows title, view count, channel name, and published date
-- [ ] **YT-03**: Each YouTube card links to original YouTube video
-- [ ] **YT-04**: Background job fetches YouTube videos via Data API v3 (max 4x/day to respect quota)
+- [x] **YT-03**: Each YouTube card links to original YouTube video
+- [x] **YT-04**: Background job fetches YouTube videos via Data API v3 (max 4x/day to respect quota)
 
 ### Social Data Model
 
@@ -123,10 +123,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SOC-01 | Phase 2 | Complete |
 | SOC-02 | Phase 2 | Complete |
 | SOC-03 | Phase 2 | Complete |
-| YT-01 | Phase 3 | Pending |
-| YT-02 | Phase 3 | Pending |
-| YT-03 | Phase 3 | Pending |
-| YT-04 | Phase 3 | Pending |
+| YT-01 | Phase 3 | Pending (UI — Plan 02) |
+| YT-02 | Phase 3 | Pending (UI — Plan 02) |
+| YT-03 | Phase 3 | Complete (03-01) |
+| YT-04 | Phase 3 | Complete (03-01) |
 | DASH-01 | Phase 4 | Pending |
 | DASH-02 | Phase 1 | Complete |
 | DASH-03 | Phase 4 | Pending |
