@@ -23,3 +23,13 @@ production:
     class: DataRetentionJob
     schedule: every day at 3am
     queue: default
+
+  hn_social_fetch:
+    class: HnSocialJob
+    schedule: every 2 hours
+    queue: default
+
+  reddit_social_fetch:
+    class: RedditSocialJob
+    schedule: every 2 hours
+    queue: default

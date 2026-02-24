@@ -26,7 +26,7 @@ class DataRetentionJobTest < ActiveSupport::TestCase
 
     io.rewind
     log_output = io.read
-    assert_match(/DataRetentionJob: pruned \d+ GitHubMetric records older than/, log_output)
+    assert_match(/DataRetentionJob: pruned \d+ GitHubMetric, \d+ SocialPost records older than/, log_output)
   ensure
     Rails.logger = original_logger
   end
@@ -49,5 +49,48 @@ class DataRetentionJobTest < ActiveSupport::TestCase
     assert_nothing_raised { DataRetentionJob.perform_now }
 
     assert_equal 1, GitHubMetric.count, "Expected one record to remain"
+  end
+
+  # ----------------------------------------------------------------
+  # SocialPost pruning tests
+  # ----------------------------------------------------------------
+
+  test "prunes SocialPost records older than 30 days" do
+    old_post = SocialPost.create!(
+      platform:    "hn",
+      external_id: "old_hn_001",
+      title:       "Old OpenClaw post",
+      url:         "https://openclaw.io/old",
+      published_at: 31.days.ago,
+      fetched_at:  31.days.ago
+    )
+    recent_post = SocialPost.create!(
+      platform:    "hn",
+      external_id: "recent_hn_001",
+      title:       "Recent OpenClaw post",
+      url:         "https://openclaw.io/new",
+      published_at: 29.days.ago,
+      fetched_at:  29.days.ago
+    )
+
+    DataRetentionJob.perform_now
+
+    assert_not SocialPost.exists?(old_post.id),    "Expected 31-day-old SocialPost to be deleted"
+    assert     SocialPost.exists?(recent_post.id), "Expected 29-day-old SocialPost to be preserved"
+  end
+
+  test "preserves SocialPost records within 30 days" do
+    today_post = SocialPost.create!(
+      platform:    "reddit",
+      external_id: "today_rdt_001",
+      title:       "Today Reddit post",
+      url:         "https://reddit.com/r/prog/today",
+      published_at: Time.current,
+      fetched_at:  Time.current
+    )
+
+    DataRetentionJob.perform_now
+
+    assert SocialPost.exists?(today_post.id), "Expected today's SocialPost to be preserved"
   end
 end

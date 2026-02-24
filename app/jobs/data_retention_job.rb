@@ -6,6 +6,7 @@ class DataRetentionJob < ApplicationJob
   def perform
     cutoff = RETENTION_DAYS.days.ago.to_date
     deleted = GitHubMetric.where("recorded_on < ?", cutoff).delete_all
-    Rails.logger.info "DataRetentionJob: pruned #{deleted} GitHubMetric records older than #{cutoff}"
+    deleted_social = SocialPost.where("published_at < ?", cutoff.beginning_of_day).delete_all
+    Rails.logger.info "DataRetentionJob: pruned #{deleted} GitHubMetric, #{deleted_social} SocialPost records older than #{cutoff}"
   end
 end
