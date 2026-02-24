@@ -10,29 +10,29 @@ See: .planning/PROJECT.md (updated 2026-02-23)
 ## Current Position
 
 Phase: 2 of 4 (Social Feed — HN and Reddit)
-Plan: 3 of 3 in current phase (paused at checkpoint — awaiting visual verification)
+Plan: 2 of 3 in current phase
 Status: Active
-Last activity: 2026-02-23 — Executing plan 02-03 (Social feed UI); paused at Task 3 visual checkpoint
+Last activity: 2026-02-24 — Completed plan 02-02 (HnSocialJob, RedditSocialJob, DataRetentionJob extended, recurring.yml scheduled)
 
-Progress: [████░░░░░░] 33%
+Progress: [█████░░░░░] 42%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: 14min
-- Total execution time: 58min
+- Total plans completed: 5
+- Average duration: 12min
+- Total execution time: 61min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-foundation-github-pipeline | 3/3 | 55min | 18min |
-| 02-social-feed-hn-and-reddit | 1/3 | 3min | 3min |
+| 02-social-feed-hn-and-reddit | 2/3 | 6min | 3min |
 
 **Recent Trend:**
-- Last 5 plans: 16min, 4min, 35min, 3min
-- Trend: variable
+- Last 5 plans: 4min, 35min, 3min, 3min
+- Trend: consistently fast
 
 *Updated after each plan completion*
 
@@ -60,6 +60,10 @@ Recent decisions affecting current work:
 - [02-01]: HN URL fallback to discussion page — hit["url"] || HN item URL — Ask HN posts lack external URL, discussion thread is correct destination
 - [02-01]: Always-fresh Reddit OAuth2 token — never cache; tokens expire in 1 hour but sync job runs every 2 hours
 - [02-01]: All subreddits searched (no restrict_sr) — correct default for cross-Reddit brand monitoring
+- [02-02]: Rails.cache swap in tests — test env uses NullStore; swap to MemoryStore.new in individual tests, restore in ensure — avoids changing global test env config
+- [02-02]: SocialPost.upsert mandatory for score/comment_count freshness — find_or_create_by leaves stale data on re-fetch
+- [02-02]: AuthError silenced for Reddit — missing credentials is expected pre-deployment; HN must work independently
+- [02-02]: 6-hour cache TTL for error state — auto-clears stale errors without requiring successful fetch
 
 ### Pending Todos
 
@@ -74,6 +78,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-23
-Stopped at: 02-03-PLAN.md Task 3 checkpoint — awaiting visual verification of social feed section
+Last session: 2026-02-24
+Stopped at: Completed 02-02-PLAN.md (HnSocialJob, RedditSocialJob, DataRetentionJob, recurring.yml) — Phase 2 Plan 2 complete
 Resume file: None

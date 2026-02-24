@@ -49,8 +49,8 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md -- Data foundation (SocialPost model + migration, HnClient service, RedditClient service)
-- [ ] 02-02-PLAN.md -- Background jobs + scheduling (HnSocialJob, RedditSocialJob, DataRetentionJob extension, recurring.yml)
+- [x] 02-01-PLAN.md -- Data foundation (SocialPost model + migration, HnClient service, RedditClient service)
+- [x] 02-02-PLAN.md -- Background jobs + scheduling (HnSocialJob, RedditSocialJob, DataRetentionJob extension, recurring.yml)
 - [ ] 02-03-PLAN.md -- Dashboard UI (Stimulus tabs, social card feed, platform badges, empty states, visual verification)
 
 ### Phase 3: YouTube Integration
@@ -87,6 +87,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation + GitHub Pipeline | 3/3 | Complete    | 2026-02-24 |
-| 2. Social Feed — HN and Reddit | 1/3 | In Progress|  |
+| 2. Social Feed — HN and Reddit | 2/3 | In Progress|  |
 | 3. YouTube Integration | 0/? | Not started | - |
 | 4. Dashboard Polish | 0/? | Not started | - |

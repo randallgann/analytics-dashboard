@@ -32,14 +32,14 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **HN-01**: Dashboard displays recent HN posts mentioning OpenClaw as card feed
 - [x] **HN-02**: Each HN card shows title, points, comment count, author, and published date
 - [x] **HN-03**: Each HN card links to original HN discussion
-- [ ] **HN-04**: Background job fetches HN posts via Algolia API every 2 hours
+- [x] **HN-04**: Background job fetches HN posts via Algolia API every 2 hours
 
 ### Social Tracking — Reddit
 
 - [ ] **RDT-01**: Dashboard displays recent Reddit posts mentioning OpenClaw as card feed
 - [x] **RDT-02**: Each Reddit card shows title, upvotes, comment count, subreddit, author, and published date
 - [x] **RDT-03**: Each Reddit card links to original Reddit post
-- [ ] **RDT-04**: Background job fetches Reddit posts via API (OAuth2 if needed) every 2 hours
+- [x] **RDT-04**: Background job fetches Reddit posts via API (OAuth2 if needed) every 2 hours
 
 ### Social Tracking — YouTube
 
@@ -115,11 +115,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | HN-01 | Phase 2 | Pending |
 | HN-02 | Phase 2 | Complete |
 | HN-03 | Phase 2 | Complete |
-| HN-04 | Phase 2 | Pending |
+| HN-04 | Phase 2 | Complete |
 | RDT-01 | Phase 2 | Pending |
 | RDT-02 | Phase 2 | Complete |
 | RDT-03 | Phase 2 | Complete |
-| RDT-04 | Phase 2 | Pending |
+| RDT-04 | Phase 2 | Complete |
 | SOC-01 | Phase 2 | Complete |
 | SOC-02 | Phase 2 | Pending |
 | SOC-03 | Phase 2 | Pending |
