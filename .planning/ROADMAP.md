@@ -51,7 +51,7 @@ Plans:
 Plans:
 - [x] 02-01-PLAN.md -- Data foundation (SocialPost model + migration, HnClient service, RedditClient service)
 - [x] 02-02-PLAN.md -- Background jobs + scheduling (HnSocialJob, RedditSocialJob, DataRetentionJob extension, recurring.yml)
-- [ ] 02-03-PLAN.md -- Dashboard UI (Stimulus tabs, social card feed, platform badges, empty states, visual verification)
+- [x] 02-03-PLAN.md -- Dashboard UI (Stimulus tabs, social card feed, platform badges, empty states, visual verification)
 
 ### Phase 3: YouTube Integration
 **Goal**: YouTube video cards appear in the social feed, fetched at most 4 times per day to stay within the free API quota
@@ -61,10 +61,11 @@ Plans:
   1. The dashboard displays YouTube videos mentioning OpenClaw with title, view count, channel name, published date, and a clickable link to the video
   2. YouTube cards display the YouTube platform badge alongside HN and Reddit cards
   3. The YouTube fetch job runs no more than 4 times per day and does not exhaust the free API quota
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 03-01: TBD
+- [ ] 03-01-PLAN.md -- YouTube data pipeline (YoutubeClient service, YoutubeSocialJob, SocialPost model update, recurring schedule)
+- [ ] 03-02-PLAN.md -- Dashboard UI (YouTube tab, card rendering, badge, error/empty states, visual verification)
 
 ### Phase 4: Dashboard Polish
 **Goal**: The dashboard surfaces the most engaging recent content first and communicates growth at a glance — hero metrics with deltas, ranked social feed, and rich link previews when shared
@@ -88,5 +89,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 |-------|----------------|--------|-----------|
 | 1. Foundation + GitHub Pipeline | 3/3 | Complete    | 2026-02-24 |
 | 2. Social Feed — HN and Reddit | 3/3 | Complete   | 2026-02-24 |
-| 3. YouTube Integration | 0/? | Not started | - |
+| 3. YouTube Integration | 0/2 | Not started | - |
 | 4. Dashboard Polish | 0/? | Not started | - |
