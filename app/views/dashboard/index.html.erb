@@ -10,6 +10,7 @@
     <a href="#activity">Activity</a>
     <a href="#issues-prs">Issues &amp; PRs</a>
     <a href="#releases">Releases</a>
+    <a href="#social">Social</a>
   </div>
 </nav>
 
@@ -220,6 +221,74 @@
             </div>
           </div>
         <% end %>
+      </section>
+
+      <%# ============================================================
+          Section 5: Social Feed (Phase 2)
+          ============================================================ %>
+      <section id="social" class="dash-section">
+        <div class="dash-section-header">
+          <h2 class="dash-section-title">Social</h2>
+        </div>
+
+        <div data-controller="tabs"
+             data-tabs-default-tab-value="hn"
+             data-tabs-active-class="dash-tab-btn--active">
+
+          <div class="dash-tab-nav">
+            <button data-tabs-target="btn" data-tab-id="hn" data-action="click->tabs#select" class="dash-tab-btn">HN</button>
+            <button data-tabs-target="btn" data-tab-id="reddit" data-action="click->tabs#select" class="dash-tab-btn">Reddit</button>
+            <button data-tabs-target="btn" data-tab-id="all" data-action="click->tabs#select" class="dash-tab-btn">All</button>
+          </div>
+
+          <%# HN Tab %>
+          <div data-tabs-target="tab" data-tab-id="hn">
+            <div class="dash-tab-updated">
+              <% if @hn_last_updated %>
+                Last updated <%= time_ago_in_words(@hn_last_updated) %> ago
+              <% end %>
+            </div>
+            <% if @hn_fetch_error.present? %>
+              <div class="dash-social-error">Unable to fetch HN posts</div>
+            <% elsif @hn_posts.empty? %>
+              <div class="dash-social-empty">No recent mentions found on Hacker News</div>
+            <% else %>
+              <% @hn_posts.each do |post| %>
+                <%= render_social_card(post) %>
+              <% end %>
+            <% end %>
+          </div>
+
+          <%# Reddit Tab %>
+          <div data-tabs-target="tab" data-tab-id="reddit" hidden>
+            <div class="dash-tab-updated">
+              <% if @reddit_last_updated %>
+                Last updated <%= time_ago_in_words(@reddit_last_updated) %> ago
+              <% end %>
+            </div>
+            <% if @reddit_fetch_error.present? %>
+              <div class="dash-social-error">Unable to fetch Reddit posts</div>
+            <% elsif @reddit_posts.empty? %>
+              <div class="dash-social-empty">No recent mentions found on Reddit</div>
+            <% else %>
+              <% @reddit_posts.each do |post| %>
+                <%= render_social_card(post) %>
+              <% end %>
+            <% end %>
+          </div>
+
+          <%# All Tab %>
+          <div data-tabs-target="tab" data-tab-id="all" hidden>
+            <% if @all_posts.empty? %>
+              <div class="dash-social-empty">No recent mentions found</div>
+            <% else %>
+              <% @all_posts.each do |post| %>
+                <%= render_social_card(post) %>
+              <% end %>
+            <% end %>
+          </div>
+
+        </div>
       </section>
 
     <% end %>

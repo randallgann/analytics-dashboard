@@ -1,6 +1,12 @@
 require "test_helper"
 
 class DashboardControllerTest < ActionDispatch::IntegrationTest
+  # Clean up cache keys after each test to avoid pollution
+  teardown do
+    Rails.cache.delete("social_fetch_error:hn")
+    Rails.cache.delete("social_fetch_error:reddit")
+  end
+
   # DASH-06: Dashboard is publicly accessible with no login prompt
   test "GET / returns 200 with no authentication required" do
     get root_url
@@ -50,5 +56,87 @@ class DashboardControllerTest < ActionDispatch::IntegrationTest
     get root_url
     assert_response :success
     assert_match /<html/i, response.body
+  end
+
+  # Social section tests
+  test "Social section heading is rendered when GitHub data exists" do
+    get root_url
+    assert_response :success
+    assert_match /Social/, response.body
+  end
+
+  test "Social nav link is rendered" do
+    get root_url
+    assert_response :success
+    assert_match /href="#social"/, response.body
+  end
+
+  test "HN post title appears in response when HN fixture exists" do
+    get root_url
+    assert_response :success
+    assert_match /OpenClaw Launch/, response.body
+  end
+
+  test "Reddit post title appears in response when Reddit fixture exists" do
+    get root_url
+    assert_response :success
+    assert_match /OpenClaw is amazing/, response.body
+  end
+
+  test "empty state message shown when no social posts exist" do
+    SocialPost.delete_all
+    get root_url
+    assert_response :success
+    assert_match /No recent mentions found on Hacker News/, response.body
+    assert_match /No recent mentions found on Reddit/, response.body
+  end
+
+  test "HN fetch error state shows error message not empty state" do
+    SocialPost.delete_all
+    # Use memory_store temporarily since test env uses null_store
+    with_memory_cache do |cache|
+      cache.write("social_fetch_error:hn", "Connection refused")
+      get root_url
+      assert_response :success
+      assert_match /Unable to fetch HN posts/, response.body
+      assert_no_match /No recent mentions found on Hacker News/, response.body
+    end
+  end
+
+  test "Reddit fetch error state shows error message not empty state" do
+    SocialPost.delete_all
+    with_memory_cache do |cache|
+      cache.write("social_fetch_error:reddit", "Connection refused")
+      get root_url
+      assert_response :success
+      assert_match /Unable to fetch Reddit posts/, response.body
+      assert_no_match /No recent mentions found on Reddit/, response.body
+    end
+  end
+
+  test "fetch error takes precedence over existing stale posts" do
+    # Stale posts exist from a previous successful fetch
+    # but the latest fetch failed — error state must win
+    with_memory_cache do |cache|
+      cache.write("social_fetch_error:hn", "Timeout")
+      get root_url
+      assert_response :success
+      assert_match /Unable to fetch HN posts/, response.body
+      # Even though HN fixture posts exist, error message should appear
+      assert_no_match /No recent mentions found on Hacker News/, response.body
+    end
+  end
+
+  private
+
+  # Temporarily swap Rails.cache with a memory store so cache writes are testable
+  # (test env uses null_store by default which discards all writes)
+  def with_memory_cache
+    memory_cache = ActiveSupport::Cache::MemoryStore.new
+    original_cache = Rails.cache
+    Rails.cache = memory_cache
+    yield memory_cache
+  ensure
+    Rails.cache = original_cache
   end
 end

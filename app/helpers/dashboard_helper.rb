@@ -34,4 +34,33 @@ module DashboardHelper
     return "No data yet" if timestamp.nil?
     "Updated #{time_ago_in_words(timestamp)} ago"
   end
+
+  # Renders a social post card with platform badge, title link, and metadata row
+  def render_social_card(post)
+    content_tag(:div, class: "dash-social-card") do
+      badge = content_tag(:div, class: "dash-social-badge dash-social-badge--#{post.platform}") do
+        post.hn? ? "Y".html_safe : "R".html_safe
+      end
+
+      content = content_tag(:div, class: "dash-social-content") do
+        # Use hn_discussion_url as fallback for HN posts without a URL (e.g., Ask HN)
+        # Do NOT use "#" for HN — the model provides hn_discussion_url for this exact case
+        card_url = post.url || (post.hn? ? post.hn_discussion_url : "#")
+        title_link = link_to(post.title, card_url, target: "_blank", rel: "noopener", class: "dash-social-title")
+
+        meta_parts = []
+        meta_parts << content_tag(:span, "#{post.score} pts")
+        meta_parts << content_tag(:span, "#{post.comment_count} comments")
+        meta_parts << content_tag(:span, post.author) if post.author.present?
+        meta_parts << content_tag(:span, "r/#{post.subreddit}") if post.reddit? && post.subreddit.present?
+        meta_parts << content_tag(:span, "#{time_ago_in_words(post.published_at)} ago") if post.published_at.present?
+
+        meta = content_tag(:div, safe_join(meta_parts, " "), class: "dash-social-meta")
+
+        safe_join([title_link, meta])
+      end
+
+      safe_join([badge, content])
+    end
+  end
 end
