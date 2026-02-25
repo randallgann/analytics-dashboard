@@ -59,7 +59,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **DASH-01**: Hero metrics row showing total stars, forks, open issues with 7-day delta indicators
 - [x] **DASH-02**: Time-series charts rendered via Chartkick/Chart.js with real data (replacing static placeholders)
 - [x] **DASH-03**: Social posts ranked by recency-weighted engagement score (fresh + engaging posts surface first)
-- [ ] **DASH-04**: OpenGraph meta tags for rich preview when dashboard URL is shared
+- [x] **DASH-04**: OpenGraph meta tags for rich preview when dashboard URL is shared
 - [x] **DASH-05**: Page loads under 3 seconds (all data pre-fetched by background jobs)
 - [x] **DASH-06**: Public-facing, no authentication required
 
@@ -130,7 +130,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DASH-01 | Phase 4 | Complete |
 | DASH-02 | Phase 1 | Complete |
 | DASH-03 | Phase 4 | Complete |
-| DASH-04 | Phase 4 | Pending |
+| DASH-04 | Phase 4 | Complete |
 | DASH-05 | Phase 1 | Complete |
 | DASH-06 | Phase 1 | Complete |
 

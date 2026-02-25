@@ -9,19 +9,19 @@ See: .planning/PROJECT.md (updated 2026-02-23)
 
 ## Current Position
 
-Phase: 4 of 4 (Dashboard Polish) — IN PROGRESS
-Plan: 1 of 2 in current phase — COMPLETE
-Status: Plan 04-01 complete, ready for 04-02
-Last activity: 2026-02-25 — Completed plan 04-01 (hero metrics row with 7-day deltas + engagement-ranked social feed)
+Phase: 4 of 4 (Dashboard Polish) — COMPLETE
+Plan: 2 of 2 in current phase — COMPLETE
+Status: All 4 phases complete — v1.0 milestone achieved
+Last activity: 2026-02-24 — Completed plan 04-02 (OpenGraph + Twitter Card meta tags for social sharing)
 
-Progress: [█████████░] 87%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
-- Average duration: 12min
-- Total execution time: 113min
+- Total plans completed: 10
+- Average duration: 11min
+- Total execution time: 114min
 
 **By Phase:**
 
@@ -30,7 +30,7 @@ Progress: [█████████░] 87%
 | 01-foundation-github-pipeline | 3/3 | 55min | 18min |
 | 02-social-feed-hn-and-reddit | 3/3 | 36min | 12min |
 | 03-youtube-integration | 2/2 | 19min | 10min |
-| 04-dashboard-polish | 1/2 | 3min | 3min |
+| 04-dashboard-polish | 2/2 | 4min | 2min |
 
 **Recent Trend:**
 - Last 5 plans: 3min, 30min, 4min, 15min, 3min
@@ -82,6 +82,9 @@ Recent decisions affecting current work:
 - [04-01]: ranked_by_engagement returns plain Array (not Relation) — callers partition in Ruby with select, cannot chain .where
 - [04-01]: Single-fetch pattern — controller calls ranked_by_engagement(limit: 50) once, partitions in Ruby to avoid N+1
 - [04-01]: Fixture dates updated 2025-12 to 2026-02 — last_30_days scope excluded old posts, breaking existing HN/Reddit title assertions
+- [04-02]: request.base_url for og:image absolute URL — no asset_host or ENV var config needed; works in all environments
+- [04-02]: OG image in public/ not app/assets/ — bypasses Propshaft fingerprinting for stable share URLs across deploys
+- [04-02]: og:image:width/height declared as 1200x630 even though current icon is square — previewers handle mismatch gracefully
 
 ### Pending Todos
 
@@ -97,6 +100,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-25
-Stopped at: Completed 04-01-PLAN.md (hero metrics row with 7-day deltas + HN-style engagement ranking for social feed)
+Last session: 2026-02-24
+Stopped at: Completed 04-02-PLAN.md (OpenGraph + Twitter Card meta tags for rich social link previews)
 Resume file: None
