@@ -35,17 +35,14 @@ class DashboardController < ApplicationController
     # Single fetch + Ruby partition avoids N+1 (see RESEARCH Pitfall 5)
     @ranked_posts  = SocialPost.ranked_by_engagement(limit: 50)
     @hn_posts      = @ranked_posts.select(&:hn?).first(5)
-    @reddit_posts  = @ranked_posts.select(&:reddit?).first(5)
     @youtube_posts = @ranked_posts.select(&:youtube?).first(5)
     # All tab: recency order (not engagement) to avoid YouTube view count domination (RESEARCH Open Question 1)
     @all_posts     = SocialPost.last_30_days.recent_first.limit(15)
 
     @hn_last_updated     = SocialPost.last_fetched_at("hn")
-    @reddit_last_updated = SocialPost.last_fetched_at("reddit")
 
     # Fetch error state from cache (written by social fetch jobs on failure, cleared on success)
     @hn_fetch_error     = Rails.cache.read("social_fetch_error:hn")
-    @reddit_fetch_error = Rails.cache.read("social_fetch_error:reddit")
 
     # YouTube social feed data (Phase 3)
     @youtube_last_updated = SocialPost.last_fetched_at("youtube")

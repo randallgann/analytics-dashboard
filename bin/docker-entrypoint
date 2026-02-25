@@ -1,8 +1,20 @@
 #!/bin/bash -e
 
 # If running the rails server then create or migrate existing database
-if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
+if [[ "$*" == *"./bin/rails server"* ]]; then
   ./bin/rails db:prepare
+
+  # On Cloud Run with ephemeral filesystem, Solid Queue scheduled jobs never fire
+  # before the container scales down. Run fetch jobs synchronously at startup so
+  # data is ready for the first request. Each job rescues its own errors internally.
+  ./bin/rails runner "
+    [GithubMetricJob, HnSocialJob, YoutubeSocialJob].each do |job|
+      Rails.logger.info \"Running #{job} at startup...\"
+      job.perform_now
+    rescue => e
+      Rails.logger.warn \"#{job} failed at startup: #{e.message}\"
+    end
+  "
 fi
 
 exec "${@}"

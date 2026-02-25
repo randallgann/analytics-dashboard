@@ -246,7 +246,6 @@
 
           <div class="dash-tab-nav">
             <button data-tabs-target="btn" data-tab-id="hn" data-action="click->tabs#select" class="dash-tab-btn">HN</button>
-            <button data-tabs-target="btn" data-tab-id="reddit" data-action="click->tabs#select" class="dash-tab-btn">Reddit</button>
             <button data-tabs-target="btn" data-tab-id="youtube" data-action="click->tabs#select" class="dash-tab-btn">YouTube</button>
             <button data-tabs-target="btn" data-tab-id="all" data-action="click->tabs#select" class="dash-tab-btn">All</button>
           </div>
@@ -264,24 +263,6 @@
               <div class="dash-social-empty">No recent mentions found on Hacker News</div>
             <% else %>
               <% @hn_posts.each do |post| %>
-                <%= render_social_card(post) %>
-              <% end %>
-            <% end %>
-          </div>
-
-          <%# Reddit Tab %>
-          <div data-tabs-target="tab" data-tab-id="reddit" hidden>
-            <div class="dash-tab-updated">
-              <% if @reddit_last_updated %>
-                Last updated <%= time_ago_in_words(@reddit_last_updated) %> ago
-              <% end %>
-            </div>
-            <% if @reddit_fetch_error.present? %>
-              <div class="dash-social-error">Unable to fetch Reddit posts</div>
-            <% elsif @reddit_posts.empty? %>
-              <div class="dash-social-empty">No recent mentions found on Reddit</div>
-            <% else %>
-              <% @reddit_posts.each do |post| %>
                 <%= render_social_card(post) %>
               <% end %>
             <% end %>
