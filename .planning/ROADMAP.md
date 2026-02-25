@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation + GitHub Pipeline** - SQLite WAL mode, shared HTTP client, GitHub API end-to-end with real chart data (completed 2026-02-24)
 - [x] **Phase 2: Social Feed — HN and Reddit** - SocialPost model, card feed UI, Hacker News and Reddit ingest jobs (completed 2026-02-24)
 - [x] **Phase 3: YouTube Integration** - YouTube video cards with quota-aware scheduling (4x/day max) (completed 2026-02-25)
-- [ ] **Phase 4: Dashboard Polish** - Engagement ranking, delta indicators, OpenGraph sharing tags
+- [x] **Phase 4: Dashboard Polish** - Engagement ranking, delta indicators, OpenGraph sharing tags (completed 2026-02-25)
 
 ## Phase Details
 
@@ -92,4 +92,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | 1. Foundation + GitHub Pipeline | 3/3 | Complete    | 2026-02-24 |
 | 2. Social Feed — HN and Reddit | 3/3 | Complete   | 2026-02-24 |
 | 3. YouTube Integration | 2/2 | Complete   | 2026-02-25 |
-| 4. Dashboard Polish | 1/2 | In Progress|  |
+| 4. Dashboard Polish | 1/2 | Complete    | 2026-02-25 |
