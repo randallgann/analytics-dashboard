@@ -76,10 +76,11 @@ Plans:
   2. Social posts across all platforms are ranked by recency-weighted engagement — recent high-engagement posts surface above old low-engagement posts
   3. Sharing the dashboard URL on Slack, Twitter, or any link previewer shows a rich embed with title, description, and image
 **Gap Closure:** Closes gaps from v1.0 milestone audit (DASH-01, DASH-03, DASH-04)
-**Plans**: TBD (run `/gsd:plan-phase 4` to create)
+**Plans**: 2 plans
 
 Plans:
-- TBD
+- [ ] 04-01-PLAN.md -- Hero metrics row with 7-day deltas + recency-weighted engagement ranking (DASH-01, DASH-03)
+- [ ] 04-02-PLAN.md -- OpenGraph and Twitter Card meta tags for rich link previews (DASH-04)
 
 ## Progress
 
