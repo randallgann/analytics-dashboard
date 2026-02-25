@@ -26,10 +26,19 @@ class DashboardController < ApplicationController
     # Has any data at all?
     @has_data = GitHubMetric.exists?
 
-    # Social feed data (Phase 2)
-    @hn_posts     = SocialPost.for_platform("hn").top_posts(5)
-    @reddit_posts = SocialPost.for_platform("reddit").top_posts(5)
-    @all_posts    = SocialPost.order(score: :desc).limit(10)
+    # Hero metrics: 7-day deltas (DASH-01)
+    @stars_delta  = GitHubMetric.delta_value("stars")
+    @forks_delta  = GitHubMetric.delta_value("forks")
+    @issues_delta = GitHubMetric.delta_value("open_issues")
+
+    # Social feed data — engagement-ranked (DASH-03)
+    # Single fetch + Ruby partition avoids N+1 (see RESEARCH Pitfall 5)
+    @ranked_posts  = SocialPost.ranked_by_engagement(limit: 50)
+    @hn_posts      = @ranked_posts.select(&:hn?).first(5)
+    @reddit_posts  = @ranked_posts.select(&:reddit?).first(5)
+    @youtube_posts = @ranked_posts.select(&:youtube?).first(5)
+    # All tab: recency order (not engagement) to avoid YouTube view count domination (RESEARCH Open Question 1)
+    @all_posts     = SocialPost.last_30_days.recent_first.limit(15)
 
     @hn_last_updated     = SocialPost.last_fetched_at("hn")
     @reddit_last_updated = SocialPost.last_fetched_at("reddit")
@@ -39,7 +48,6 @@ class DashboardController < ApplicationController
     @reddit_fetch_error = Rails.cache.read("social_fetch_error:reddit")
 
     # YouTube social feed data (Phase 3)
-    @youtube_posts       = SocialPost.for_platform("youtube").top_posts(5)
     @youtube_last_updated = SocialPost.last_fetched_at("youtube")
     @youtube_fetch_error  = Rails.cache.read("social_fetch_error:youtube")
   end

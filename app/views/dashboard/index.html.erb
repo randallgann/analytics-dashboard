@@ -41,6 +41,15 @@
     <% else %>
 
       <%# ============================================================
+          Hero Metrics Row (DASH-01)
+          ============================================================ %>
+      <section class="dash-hero-row">
+        <%= render_hero_metric("Stars", @stars_count, @stars_delta) %>
+        <%= render_hero_metric("Forks", @forks_count, @forks_delta) %>
+        <%= render_hero_metric("Open Issues", @open_issues, @issues_delta) %>
+      </section>
+
+      <%# ============================================================
           Section 1: Stars & Forks
           ============================================================ %>
       <section id="stars-forks" class="dash-section">

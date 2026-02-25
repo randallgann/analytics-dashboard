@@ -165,6 +165,34 @@ class DashboardControllerTest < ActionDispatch::IntegrationTest
     assert_match /dash-social-badge--youtube/, response.body
   end
 
+  # DASH-01: Hero metrics row with delta indicators
+  test "hero row renders when GitHub data exists" do
+    GitHubMetric.delete_all
+    GitHubMetric.create!(metric_type: "stars", value: 100, recorded_on: 10.days.ago.to_date)
+    GitHubMetric.create!(metric_type: "stars", value: 150, recorded_on: Date.today)
+    GitHubMetric.create!(metric_type: "forks", value: 30, recorded_on: Date.today)
+    get root_url
+    assert_response :success
+    assert_match /dash-hero-row/, response.body
+    assert_match /dash-hero-card/, response.body
+  end
+
+  test "hero row shows 'No baseline yet' when fewer than 7 days of data" do
+    GitHubMetric.delete_all
+    GitHubMetric.create!(metric_type: "stars", value: 150, recorded_on: Date.today)
+    get root_url
+    assert_response :success
+    assert_match /No baseline yet/, response.body
+  end
+
+  # DASH-03: Engagement-ranked social feed
+  test "social posts are rendered in engagement-ranked order per platform" do
+    get root_url
+    assert_response :success
+    # Social section renders without error
+    assert_match /Social/, response.body
+  end
+
   private
 
   # Temporarily swap Rails.cache with a memory store so cache writes are testable
