@@ -65,7 +65,7 @@ Plans:
 
 Plans:
 - [x] 03-01-PLAN.md -- YouTube data pipeline (YoutubeClient service, YoutubeSocialJob, SocialPost model update, recurring schedule)
-- [ ] 03-02-PLAN.md -- Dashboard UI (YouTube tab, card rendering, badge, error/empty states, visual verification)
+- [x] 03-02-PLAN.md -- Dashboard UI (YouTube tab, card rendering, badge, error/empty states, visual verification)
 
 ### Phase 4: Dashboard Polish
 **Goal**: The dashboard surfaces the most engaging recent content first and communicates growth at a glance — hero metrics with deltas, ranked social feed, and rich link previews when shared
@@ -75,10 +75,11 @@ Plans:
   1. A hero metrics row at the top of the dashboard shows total stars, forks, and open issues with 7-day delta indicators (e.g., "+142 stars this week")
   2. Social posts across all platforms are ranked by recency-weighted engagement — recent high-engagement posts surface above old low-engagement posts
   3. Sharing the dashboard URL on Slack, Twitter, or any link previewer shows a rich embed with title, description, and image
-**Plans**: TBD
+**Gap Closure:** Closes gaps from v1.0 milestone audit (DASH-01, DASH-03, DASH-04)
+**Plans**: TBD (run `/gsd:plan-phase 4` to create)
 
 Plans:
-- [ ] 04-01: TBD
+- TBD
 
 ## Progress
 

@@ -123,8 +123,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SOC-01 | Phase 2 | Complete |
 | SOC-02 | Phase 2 | Complete |
 | SOC-03 | Phase 2 | Complete |
-| YT-01 | Phase 3 | Pending (UI — Plan 02) |
-| YT-02 | Phase 3 | Pending (UI — Plan 02) |
+| YT-01 | Phase 3 | Complete (03-02) |
+| YT-02 | Phase 3 | Complete (03-02) |
 | YT-03 | Phase 3 | Complete (03-01) |
 | YT-04 | Phase 3 | Complete (03-01) |
 | DASH-01 | Phase 4 | Pending |
