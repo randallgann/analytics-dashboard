@@ -153,4 +153,32 @@ class SocialPostTest < ActiveSupport::TestCase
     )
     assert post.valid?, "Expected YouTube post to be valid: #{post.errors.full_messages.inspect}"
   end
+
+  # DASH-03: ranked_by_engagement tests
+  test "ranked_by_engagement returns posts sorted by time-decay engagement" do
+    SocialPost.create!(platform: "hn", external_id: "rank_old_high",
+      title: "Old High Score", score: 500, comment_count: 100,
+      published_at: 20.days.ago, fetched_at: Time.current)
+    SocialPost.create!(platform: "hn", external_id: "rank_new_mid",
+      title: "New Mid Score", score: 100, comment_count: 20,
+      published_at: 1.hour.ago, fetched_at: Time.current)
+
+    ranked = SocialPost.ranked_by_engagement(limit: 2)
+    assert_kind_of Array, ranked
+    # Recent post with moderate engagement should rank above old high-score post
+    assert_equal "New Mid Score", ranked.first.title
+  end
+
+  test "ranked_by_engagement excludes posts with nil published_at" do
+    SocialPost.create!(platform: "hn", external_id: "rank_nil_pub",
+      title: "No Pub Date", score: 999, published_at: nil,
+      fetched_at: Time.current)
+    ranked = SocialPost.ranked_by_engagement
+    refute ranked.any? { |p| p.external_id == "rank_nil_pub" }
+  end
+
+  test "ranked_by_engagement returns empty array when no posts exist" do
+    SocialPost.delete_all
+    assert_equal [], SocialPost.ranked_by_engagement
+  end
 end

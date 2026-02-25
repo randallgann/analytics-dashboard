@@ -51,4 +51,21 @@ class GitHubMetricTest < ActiveSupport::TestCase
     assert_not metric.valid?
     assert_includes metric.errors[:metric_type], "is not included in the list"
   end
+
+  # DASH-01: delta_value tests
+  test "delta_value returns difference between current and 7-day-old value" do
+    GitHubMetric.create!(metric_type: "stars", value: 100, recorded_on: 10.days.ago.to_date)
+    GitHubMetric.create!(metric_type: "stars", value: 150, recorded_on: Date.today)
+    delta = GitHubMetric.delta_value("stars")
+    assert_equal 50, delta.to_i
+  end
+
+  test "delta_value returns nil when fewer than 7 days of data" do
+    GitHubMetric.create!(metric_type: "commit_frequency", value: 10, recorded_on: Date.today)
+    assert_nil GitHubMetric.delta_value("commit_frequency")
+  end
+
+  test "delta_value returns nil when no data exists" do
+    assert_nil GitHubMetric.delta_value("release_cadence")
+  end
 end

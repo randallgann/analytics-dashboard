@@ -35,6 +35,27 @@ module DashboardHelper
     "Updated #{time_ago_in_words(timestamp)} ago"
   end
 
+  # Renders a hero metric card with label, value, and 7-day delta indicator
+  def render_hero_metric(label, value, delta, period = "7d")
+    content_tag(:div, class: "dash-hero-card") do
+      label_el = content_tag(:div, label, class: "dash-hero-label")
+      value_el = content_tag(:div, format_number(value), class: "dash-hero-value")
+      delta_el = format_delta(delta, period)
+      safe_join([label_el, value_el, delta_el])
+    end
+  end
+
+  # Formats a delta value with sign prefix and color-coded CSS class.
+  # Returns "No baseline yet" in neutral color when delta is nil.
+  def format_delta(delta, period = "7d")
+    return content_tag(:div, "No baseline yet", class: "dash-delta dash-delta--neutral") if delta.nil?
+
+    sign = delta >= 0 ? "+" : ""
+    css  = delta > 0 ? "positive" : (delta < 0 ? "negative" : "neutral")
+    text = "#{sign}#{format_number(delta.to_i)} this #{period}"
+    content_tag(:div, text, class: "dash-delta dash-delta--#{css}")
+  end
+
   # Renders a social post card with platform badge, title link, and metadata row
   def render_social_card(post)
     content_tag(:div, class: "dash-social-card") do

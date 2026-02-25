@@ -22,4 +22,14 @@ class GitHubMetric < ApplicationRecord
   def self.latest_value(metric_type)
     for_metric(metric_type).order(recorded_on: :desc).first&.value
   end
+
+  def self.delta_value(metric_type, days: 7)
+    current = for_metric(metric_type).order(recorded_on: :desc).first&.value
+    past    = for_metric(metric_type)
+                .where(recorded_on: ...(Date.today - days))
+                .order(recorded_on: :desc)
+                .first&.value
+    return nil if current.nil? || past.nil?
+    current - past
+  end
 end
