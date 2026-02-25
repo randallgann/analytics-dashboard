@@ -9,6 +9,22 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%# OpenGraph / Social Sharing Meta Tags (DASH-04) %>
+    <meta property="og:type"         content="website">
+    <meta property="og:site_name"    content="OpenClaw Analytics">
+    <meta property="og:title"        content="OpenClaw Analytics Dashboard">
+    <meta property="og:description"  content="GitHub metrics, Hacker News, Reddit, and YouTube mentions for OpenClaw — updated automatically.">
+    <meta property="og:url"          content="<%= request.base_url %>">
+    <meta property="og:image"        content="<%= request.base_url %>/og-image.png">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+
+    <%# Twitter Card (also read by Slack and many other previewers) %>
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="OpenClaw Analytics Dashboard">
+    <meta name="twitter:description" content="GitHub metrics, Hacker News, Reddit, and YouTube mentions for OpenClaw — updated automatically.">
+    <meta name="twitter:image"       content="<%= request.base_url %>/og-image.png">
+
     <%= yield :head %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>

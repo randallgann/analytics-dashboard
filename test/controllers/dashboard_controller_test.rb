@@ -193,6 +193,24 @@ class DashboardControllerTest < ActionDispatch::IntegrationTest
     assert_match /Social/, response.body
   end
 
+  # DASH-04: OpenGraph meta tags for rich social previews
+  test "OpenGraph meta tags are present in response" do
+    get root_url
+    assert_response :success
+    assert_match /og:title/, response.body
+    assert_match /og:description/, response.body
+    assert_match /og:image/, response.body
+    assert_match /og-image\.png/, response.body
+    assert_match /twitter:card/, response.body
+  end
+
+  test "og:image URL is absolute, not relative" do
+    get root_url
+    assert_response :success
+    # The og:image content attribute must start with http
+    assert_match /og:image.*content="https?:\/\//, response.body
+  end
+
   private
 
   # Temporarily swap Rails.cache with a memory store so cache writes are testable
