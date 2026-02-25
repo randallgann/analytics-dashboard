@@ -43,8 +43,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Social Tracking — YouTube
 
-- [ ] **YT-01**: Dashboard displays recent YouTube videos mentioning OpenClaw as card feed
-- [ ] **YT-02**: Each YouTube card shows title, view count, channel name, and published date
+- [x] **YT-01**: Dashboard displays recent YouTube videos mentioning OpenClaw as card feed
+- [x] **YT-02**: Each YouTube card shows title, view count, channel name, and published date
 - [x] **YT-03**: Each YouTube card links to original YouTube video
 - [x] **YT-04**: Background job fetches YouTube videos via Data API v3 (max 4x/day to respect quota)
 
